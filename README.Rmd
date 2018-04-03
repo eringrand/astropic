@@ -1,0 +1,36 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# apodR
+
+The goal of apodR is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("eringrand/apodR")
+```
+## Example
+
+This is a basic example to retrive APOD data. If you do not give an end date, it will assume you want up untill today.
+
+```{r example}
+library(dplyr)
+library(apodR)
+library(DT)
+get_apod(start_date = "2018-04-03")
+```
