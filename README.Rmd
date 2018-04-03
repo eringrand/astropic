@@ -12,9 +12,12 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # apodR
 
 The goal of apodR is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+
+Thanks to Michael W. Kearney, author of [Rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton! 
 
 ## Installation
 
@@ -28,12 +31,19 @@ devtools::install_github("eringrand/apodR")
 
 This is a basic example to retrive APOD data. 
 
-```{r example}
-library(dplyr)
+```{r example1}
 library(apodR)
-library(DT)
 get_apod() # no imputs will get today's image
 ```
+
+
+You can also supply a start and end date to get a range of image results back.
+```{r}
+get_apod(start_date = "2018-04-01", end_date = "2018-04-03")
+```
+
+
+
 
 With a little `magick` you can also save the APOD image to your computer for use later. 
 This is a demostration of a picture in APOD I helped to create!
@@ -41,6 +51,7 @@ This is a demostration of a picture in APOD I helped to create!
 library(magick)
 library(gmp)
 library(stringr)
+library(dplyr)
 
 save_image <- function(url){
   image <- try(image_read(url), silent = FALSE)
@@ -53,7 +64,7 @@ save_image <- function(url){
   return(image)
 }
 
-m31 <- get_apod(start_date = "2009-09-17") 
+m31 <- get_apod(start_date = "2009-09-17")  # only providing a start date will give the image just for that day
 pull(m31, explanation)
 save_image(m31$hdurl)
 ```
