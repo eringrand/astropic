@@ -35,10 +35,10 @@ get_apod <- function(start_date = NULL, end_date = NULL) {
 #' @param url URL to send to API, constructed with make_url
 #' @noRd
 
-one_apod <- function(url) {
+one_apod <- function(url, print = FALSE) {
   r <- httr::GET(url)
   limit <- remaining_rate_limit(r)
-  print(paste("Your remaining API request limit this hour is", limit))
+  if(print) print(paste("Your remaining API request limit this hour is", limit))
   r_list <- from_js(r)
   return(tibble::as_tibble(r_list))
 }

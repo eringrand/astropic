@@ -1,17 +1,17 @@
-Package: APODR
+Package: apodR
 Version: 0.0.0.9000
 Title: What the Package Does (One Line, Title Case)
 Description: What the package does (one paragraph).
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
+Authors@R: person("Erin", "Grand", email = "eringrand@gmail.com", role = c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
-LinkingTo: 
-    Rcpp
+Depends:
+    R (>= 2.1.0)
 Imports: 
-    Rcpp
-Suggests: 
-    testthat
+    purrr, 
+    dplyr, 
+    httr (>= 1.0.0),
