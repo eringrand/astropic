@@ -58,3 +58,4 @@ pull(m31, explanation)
 save_image(m31$hdurl)
 ```
 
+![](man/figures/README/Swift_M31_large_UV70p.jpg)
