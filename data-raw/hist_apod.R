@@ -51,11 +51,15 @@ errs <- tibble::tibble(year  = year_list, obj = hist_list) %>%
   tidyr::unnest(missing_cols) %>%
   filter(!is.na(missing_cols))
 
+errs
+
 
 
 # Combine Together --------------------------------------------------------
 
-hist_apod <- bind_rows(year7, year8, year9, year10, year11, year12, year13, year14, year15, year16, year17)
+hist_apod <- bind_rows(year7, year8, year9, year10, year11, year12, year13, year14, year15, year16, year17) %>%
+  select(-error) %>%
+  filter(!is.na(date))
 
 usethis::use_data(hist_apod, overwrite = TRUE)
 usethis::use_data(year7, overwrite = TRUE)
