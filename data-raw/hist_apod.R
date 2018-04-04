@@ -15,7 +15,7 @@ hist_apod <- function(year) {
 
 #year7 <- hist_apod(2007)
 #year8 <- hist_apod(2008)
-Sys.sleep(3600)
+#Sys.sleep(3600)
 year9 <- hist_apod(2009)
 year10 <- hist_apod(2010)
 Sys.sleep(3600)
