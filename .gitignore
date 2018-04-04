@@ -1,6 +1,6 @@
 .Rproj.user
 .Rhistory
 .RData
-*.Rproj
 .httr-oauth
 .Rbuildignore
+APODR.Rproj
