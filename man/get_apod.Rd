@@ -4,12 +4,13 @@
 \alias{get_apod}
 \title{get_apod}
 \usage{
-get_apod(start_date = NULL, end_date = NULL)
+get_apod(query = NULL, print = FALSE)
 }
 \arguments{
-\item{start_date}{starting date you'd like to look at}
+\item{query}{Query you want}
 
-\item{end_date}{end date you'd like to look at, Default: NULL}
+\item{print}{if print = TRUE: Print out how where you are with the APOD API rate limit
+Defaults to not printing anything.}
 }
 \value{
 OUTPUT_DESCRIPTION
