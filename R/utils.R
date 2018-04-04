@@ -6,23 +6,32 @@
 #'
 
 #' make_url
-#' @param date The date you are interested in recieving APOD information from. The APOD API can only call one date at a time.
-#' @return URL used in httr call.
+#' @param query The query you are GETing
+#' @return URL used in httr call
 #' @keywords internal
 #' @noRd
 
-make_url <- function(date = NULL) {
-  if(is.null(date)) {
-    date <- Sys.Date()
+make_url <- function(query = NULL) {
+  if(is.null(query)) {
+    query <- list(api_key = nasa_key())
+  } else{
+    query$api_key <- nasa_key()
   }
-  hostname <- "api.nasa.gov/planetary/apod"
-  api_key <- "QLAzwCGQOkNxaFpWFAu2OMTWUME4YC2IIBMFqgW1"
-  scheme <-"https"
-  paste0(scheme, "://", hostname, "?", "api_key=", api_key, "&date=", date)
+  url <- structure(
+    list(scheme = "https",
+         hostname = "api.nasa.gov",
+         path = "planetary/apod",
+         port = NULL,
+         parms = NULL,
+         fragment = NULL,
+         username = NULL,
+         password = NULL,
+         query = query),
+    class = "url")
+  return(httr::build_url(url))
 }
 
-
-#' make_url
+#' from_js
 #' @param rsp The api call result
 #' @return List of results from API call
 #' @keywords internal
@@ -33,8 +42,25 @@ from_js <- function(rsp) {
   if (!is_json(rsp)) {
    stop("API did not return json", call. = FALSE)
   }
+
+  if (httr::status_code(rsp) != 200) {
+    stop(
+      sprintf(
+        "API request failed [%s]\n%s\n<%s>",
+        httr::status_code(rsp),
+        rsp$message,
+        rsp$documentation_url
+      ),
+      call. = FALSE
+    )
+  }
+
   rsp <- httr::content(rsp, as = "text", encoding = "UTF-8")
   rsp <- jsonlite::fromJSON(rsp)
+
+
+
+  return(rsp)
 }
 
 
@@ -51,8 +77,16 @@ is_json <- function(x) {
   grepl("application/json", x$headers[["content-type"]])
 }
 
-remaining_rate_limit <- function(r) {
+rate_limit <- function(r) {
   httr::headers(r)$`x-ratelimit-remaining`
 }
 
+nasa_key <- function() {
+  pat <- Sys.getenv('NASA_KEY')
+  if (identical(pat, "")) {
+    stop("Please set env var NASA_KEY to your NASA API access token",
+         call. = FALSE)
+  }
+  pat
+}
 
