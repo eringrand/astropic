@@ -49,7 +49,7 @@ The query paramters are described on the [APOD API Github page](https://github.c
 This is a basic example to retrive APOD data. 
 
 ### Basic Example
-```{r example1}
+```{r example1, warning=FALSE}
 library(astropic)
 get_apod() # no inputs will get today's image
 ```

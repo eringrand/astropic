@@ -46,8 +46,6 @@ This is a basic example to retrive APOD data.
 ``` r
 library(astropic)
 get_apod() # no inputs will get today's image
-#> Warning in strptime(x, fmt, tz = "GMT"): unknown timezone 'zone/tz/2018c.
-#> 1.0/zoneinfo/America/New_York'
 #> # A tibble: 1 x 7
 #>   date       explanation      hdurl media_type service_version title url  
 #>   <chr>      <chr>            <chr> <chr>      <chr>           <chr> <chr>
@@ -73,13 +71,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   date  explanation hdurl media_type service_version title url   copyright
-#> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
-#> 1 2008… Active gal… http… image      v1              Acti… http… <NA>     
-#> 2 2016… "Today, Fe… http… image      v1              Juli… http… <NA>     
-#> 3 1998… The North … http… image      v1              The … http… <NA>     
-#> 4 2004… The ongoin… http… image      v1              A Pe… http… Wally Pa…
-#> 5 1998… "Since the… http… image      v1              Radi… http… Rick Sco…
+#>   copyright date  explanation hdurl media_type service_version title url  
+#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
+#> 1 Serge Br… 2008… From the w… http… image      v1              Abov… http…
+#> 2 <NA>      2017… How should… http… image      v1              Cass… http…
+#> 3 Judy Sch… 2012… The first … http… image      v1              APOD… http…
+#> 4 <NA>      2004… What are S… http… image      v1              Cass… http…
+#> 5 <NA>      1995… The strong… http… image      v1              Tomo… http…
 ```
 
 ### Magic
