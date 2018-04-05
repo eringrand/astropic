@@ -1,3 +1,5 @@
+#' astropic
+
 #' @docType package
 #' @name astropic
 #' @importFrom purrr %>%
