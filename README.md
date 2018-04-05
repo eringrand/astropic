@@ -68,11 +68,11 @@ get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
 #>   date  explanation hdurl media_type service_version title url   copyright
 #> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
-#> 1 1996… Jodrell Ba… http… image      v1              Info… http… <NA>     
-#> 2 2012… Splendors … http… image      v1              Satu… http… <NA>     
-#> 3 2014… Venus now … http… image      v1              Dayt… http… Cui Yong…
-#> 4 2007… Ice geyser… http… image      v1              Ence… http… <NA>     
-#> 5 2010… This brigh… http… image      v1              Not … http… Stefano …
+#> 1 2000… "During th… http… image      v1              Moon… http… <NA>     
+#> 2 2009… Slide your… http… image      v1              NGC … http… Kent Big…
+#> 3 1997… What are t… http… image      v1              "Gia… http… <NA>     
+#> 4 1998… "Diminutiv… http… image      v1              18 M… http… <NA>     
+#> 5 2003… "If you ca… http… image      v1              Jupi… http… Tunç Tez…
 ```
 
 ### Magic
@@ -81,29 +81,9 @@ With a little `magick` you can also save the APOD image to your computer for use
 
 ``` r
 library(magick)
-#> Warning: package 'magick' was built under R version 3.4.4
-#> Linking to ImageMagick 6.9.9.39
-#> Enabled features: cairo, fontconfig, freetype, lcms, pango, rsvg, webp
-#> Disabled features: fftw, ghostscript, x11
 library(gmp)
-#> Warning: package 'gmp' was built under R version 3.4.1
-#> 
-#> Attaching package: 'gmp'
-#> The following objects are masked from 'package:base':
-#> 
-#>     %*%, apply, crossprod, matrix, tcrossprod
 library(stringr)
-#> Warning: package 'stringr' was built under R version 3.4.3
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 3.4.2
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 
 save_image <- function(url){
   image <- try(image_read(url), silent = FALSE)
