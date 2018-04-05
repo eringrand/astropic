@@ -5,7 +5,7 @@ astropic
 
 The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
 
-Thanks to Michael W. Kearney, author of [Rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton!
+Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton!
 
 Installation
 ------------
@@ -72,11 +72,11 @@ get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
 #>   date  explanation hdurl media_type service_version title url   copyright
 #> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
-#> 1 2018… The roboti… http… image      v1              Intr… http… <NA>     
-#> 2 2006… Sometimes … http… image      v1              A Su… http… Jim Kirk…
-#> 3 2000… Tomorrow's… http… image      v1              HH11… http… <NA>     
-#> 4 2012… These thre… http… image      v1              A Sa… http… Martin P…
-#> 5 2003… Our Milky … http… image      v1              The … http… A. Oksan…
+#> 1 1999… Where do s… http… image      v1              An I… http… <NA>     
+#> 2 2000… This panor… http… image      v1              Surv… http… <NA>     
+#> 3 1995… July 12, 1… http… image      v1              Eta … http… <NA>     
+#> 4 2009… At least 3… http… image      v1              Sout… http… Phil Hart
+#> 5 2015… What's hap… http… image      v1              A Sp… http… Davide N…
 ```
 
 ### Magic
