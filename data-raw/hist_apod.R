@@ -1,74 +1,79 @@
 library(dplyr)
 library(purrr)
-library(apodR)
+library(tidyr)
+library(lubridate)
+library(janitor)
+library(astropic)
+
+# Some dates just don't work - unknown why
+error_dates <- tibble::tibble(date = c("2007-05-22", "2007-12-18", "2008-12-31", "2009-04-05",
+                 "2009-04-13", "2009-06-29", "2009-08-10", "2010-01-20",
+                 "2010-01-24", "2010-05-10", "2010-05-26", "2010-06-08",
+                 "2010-07-25", "2010-08-25", "2010-12-15", "2011-01-23",
+                 "2011-02-01", "2011-02-22", "2011-03-07", "2012-03-12",
+                 "2012-05-23", "2014-01-12", "2014-02-10")) %>%
+  mutate(year = year(ymd(date)))
+
 
 
 # Start at Jan 1st and end on Dec 31st ------------------------------------
-hist_apod <- function(year) {
- start_date <- paste0(year, "-01-01")
- end_date <- paste0(year, "-12-31")
- return(get_apod(start_date, end_date))
+hist_apod_func <- function(y) {
+  start_date <- ymd(paste0(y, "-01-01"))
+  end_date <- ymd(paste0(y, "-12-31"))
+
+  # Finds dates that ERROR in year
+  errors <- error_dates %>%
+    filter(year  == y) %>%
+    mutate(date = ymd(date)) %>%
+    arrange(date) %>%
+    pull(date)
+
+  err_len <- length(errors)
+  x <- c()
+
+  # Create start/end ranges around ERROR dates
+  if(err_len == 0) { # If there are no errors, treat as normal
+    x$range0 <- list(start_date = start_date, end_date = end_date)
+  }
+  # if there are errors, but Jan 1 and Dec 31 are both not errors
+  else if(!start_date %in% errors & !end_date %in% errors) {
+    x$range0 <- list(start_date = start_date, end_date = errors[1] - 1)
+    x$rangeN <- list(start_date = errors[err_len] + 1, end_date = end_date)
+
+    for(i in seq_len(err_len - 1)) {
+      name <- paste0("range", i)
+      x[[name]] <- list(start_date = errors[i] + 1, end_date = errors[i + 1] - 1)
+    }
+  }
+  # if Dec 31 is the only error
+  else if(end_date %in% errors & err_len == 1) {
+    x$range0 <- list(start_date = start_date, end_date = end_date - 1)
+  }
+  # if Jan 1 is the only error
+  else if(start_date %in% errors & err_len == 1) {
+    x$range0 <- list(start_date = start_date - 1, end_date = end_date)
+  }
+  # if both start and end are in the errors, then start from earliest date possible
+  else if(start_date %in% errors & end_date %in% errors) {
+    for(i in seq_len(err_len - 1)) {
+      name <- paste0("range", i)
+      x[[name]] <- list(start_date = errors[i] + 1, end_date = errors[i + 1] - 1)
+    }
+  }
+  return(map_dfr(x, ~get_apod(query = .x)))
 }
 
 
-# Run for each Year from 2007 - 2017 pausing for API time limits ----------
 
-Sys.sleep(3600)
-year7 <- hist_apod(2007)
-year8 <- hist_apod(2008)
-Sys.sleep(3600)
-year9 <- hist_apod(2009)
-year10 <- hist_apod(2010)
-Sys.sleep(3600)
-year11 <- hist_apod(2011)
-year12 <- hist_apod(2012)
-Sys.sleep(3600)
-year13 <- hist_apod(2013)
-year14 <- hist_apod(2014)
-Sys.sleep(3600)
-year15 <- hist_apod(2015)
-year16 <- hist_apod(2016)
-Sys.sleep(3600)
-year17 <- hist_apod(2017)
-
-# Check every date worked -------
-check_dates <- function(year, obj) {
-  start_date <- paste0(year, "-01-01")
-  end_date <- paste0(year, "-12-31")
-  date_list <- seq(lubridate::ymd(start_date), lubridate::ymd(end_date), by = "days") %>%
-    map_chr(as.character)
-  miss <- setdiff(date_list, obj$date)
-  return(miss)
-}
-
-
-# Create set of Problem Dates ----------
-hist_list <- list(year7, year8, year9, year10, year11, year12, year13, year14, year15, year16, year17)
+# Run for each Year from 2007 - 2017 ------
 year_list <- seq(2007L, 2017L, 1)
 
-errs <- tibble::tibble(year  = year_list, obj = hist_list) %>%
-  mutate(missing_cols = map2(year, obj, check_dates)) %>%
-  tidyr::unnest(missing_cols) %>%
-  filter(!is.na(missing_cols))
+# create safe function
 
-errs
+# WARNING: this can take a long time
+hist_apod <- map_dfr(year_list, hist_apod_func)
 
 
 
-# Combine Together --------------------------------------------------------
-
-hist_apod <- bind_rows(year7, year8, year9, year10, year11, year12, year13, year14, year15, year16, year17) %>%
-  select(-error) %>%
-  filter(!is.na(date))
-
-usethis::use_data(hist_apod, overwrite = TRUE)
-usethis::use_data(year7, overwrite = TRUE)
-usethis::use_data(year8, overwrite = TRUE)
-usethis::use_data(year9, overwrite = TRUE)
-usethis::use_data(year10, overwrite = TRUE)
-usethis::use_data(year11, overwrite = TRUE)
-usethis::use_data(year13, overwrite = TRUE)
-usethis::use_data(year14, overwrite = TRUE)
-usethis::use_data(year15, overwrite = TRUE)
-usethis::use_data(year16, overwrite = TRUE)
-usethis::use_data(year17, overwrite = TRUE)
+# Push Data to Data/Folder
+usethis::use_data(hist_apod, overwrite = FALSE)
