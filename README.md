@@ -17,6 +17,13 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("eringrand/astropic")
 ```
 
+API Key
+-------
+
+To start, you'll need a NASA API key. If you do not have one, you can get one [here](https://api.nasa.gov/index.html#apply-for-an-api-key). Once you put in your information, a key will be emailed to you.
+
+Save this to your enviorment as `NASA_KEY`. e.g `Sys.setenv(NASA_KEY = "YOURKEYHERE")`.
+
 Query
 -----
 
@@ -68,11 +75,11 @@ get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
 #>   date  explanation hdurl media_type service_version title url   copyright
 #> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
-#> 1 2000… "During th… http… image      v1              Moon… http… <NA>     
-#> 2 2009… Slide your… http… image      v1              NGC … http… Kent Big…
-#> 3 1997… What are t… http… image      v1              "Gia… http… <NA>     
-#> 4 1998… "Diminutiv… http… image      v1              18 M… http… <NA>     
-#> 5 2003… "If you ca… http… image      v1              Jupi… http… Tunç Tez…
+#> 1 2008… Active gal… http… image      v1              Acti… http… <NA>     
+#> 2 2016… "Today, Fe… http… image      v1              Juli… http… <NA>     
+#> 3 1998… The North … http… image      v1              The … http… <NA>     
+#> 4 2004… The ongoin… http… image      v1              A Pe… http… Wally Pa…
+#> 5 1998… "Since the… http… image      v1              Radi… http… Rick Sco…
 ```
 
 ### Magic
