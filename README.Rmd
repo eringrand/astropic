@@ -86,7 +86,6 @@ pull(m31, explanation)
 save_image(m31$hdurl)
 ```
 
-![](man/figures/README-m31-1.png)
 
 
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
