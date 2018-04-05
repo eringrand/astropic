@@ -14,7 +14,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("eringrand/apodR")
+devtools::install_github("eringrand/astropic")
 ```
 
 Query
@@ -66,13 +66,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   copyright date  explanation hdurl media_type service_version title url  
-#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
-#> 1 Digital-… 2007… A young cr… http… image      v1              Youn… http…
-#> 2 Mila Zin… 2006… Is that wh… http… image      v1              A Fo… http…
-#> 3 Yuri Bel… 2014… The Pacifi… http… image      v1              Ecli… http…
-#> 4 <NA>      1998… On Decembe… http… image      v1              NEAR… http…
-#> 5 Christop… 2009… Sometimes … http… image      v1              Noct… http…
+#>   date  explanation hdurl media_type service_version title url   copyright
+#> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
+#> 1 1996… Jodrell Ba… http… image      v1              Info… http… <NA>     
+#> 2 2012… Splendors … http… image      v1              Satu… http… <NA>     
+#> 3 2014… Venus now … http… image      v1              Dayt… http… Cui Yong…
+#> 4 2007… Ice geyser… http… image      v1              Ence… http… <NA>     
+#> 5 2010… This brigh… http… image      v1              Not … http… Stefano …
 ```
 
 ### Magic
