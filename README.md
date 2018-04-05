@@ -70,13 +70,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   date  explanation hdurl media_type service_version title url   copyright
-#> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
-#> 1 1999… Where do s… http… image      v1              An I… http… <NA>     
-#> 2 2000… This panor… http… image      v1              Surv… http… <NA>     
-#> 3 1995… July 12, 1… http… image      v1              Eta … http… <NA>     
-#> 4 2009… At least 3… http… image      v1              Sout… http… Phil Hart
-#> 5 2015… What's hap… http… image      v1              A Sp… http… Davide N…
+#>   copyright date  explanation hdurl media_type service_version title url  
+#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
+#> 1 Daniel H… 2006… What's hap… http… image      v1              Anti… http…
+#> 2 <NA>      2008… What surpr… http… image      v1              Mars… http…
+#> 3 <NA>      1998… This drama… http… image      v1              TRAC… http…
+#> 4 Russell … 2002… Anchored i… http… image      v1              Aris… http…
+#> 5 <NA>      2014… Have you s… http… image      v1              Apol… http…
 ```
 
 ### Magic
@@ -107,5 +107,13 @@ save_image(m31$hdurl)
 ```
 
 <img src="man/figures/README-m31-1.png" width="100%" />
+
+Contact
+-------
+
+Come find me on twitter \[@astroeringand\](<https://twitter.com/astroeringrand>)
+
+Code of Conduct
+---------------
 
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
