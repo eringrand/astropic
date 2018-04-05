@@ -92,7 +92,7 @@ save_image(m31$hdurl)
 ```
 
 ## Contact
-Come find me on twitter [@astroeringand](https://twitter.com/astroeringrand)
+Come find me on twitter @[astroeringand](https://twitter.com/astroeringrand)
 
 ## Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).

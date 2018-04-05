@@ -70,13 +70,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   copyright date  explanation hdurl media_type service_version title url  
-#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
-#> 1 Daniel H… 2006… What's hap… http… image      v1              Anti… http…
-#> 2 <NA>      2008… What surpr… http… image      v1              Mars… http…
-#> 3 <NA>      1998… This drama… http… image      v1              TRAC… http…
-#> 4 Russell … 2002… Anchored i… http… image      v1              Aris… http…
-#> 5 <NA>      2014… Have you s… http… image      v1              Apol… http…
+#>   copyright date  explanation media_type service_version title url   hdurl
+#> * <chr>     <chr> <chr>       <chr>      <chr>           <chr> <chr> <chr>
+#> 1 Tor Even… 2013… Have you e… video      v1              Flow… http… <NA> 
+#> 2 <NA>      2013… Are astero… image      v1              Orbi… http… http…
+#> 3 <NA>      2016… How massiv… image      v1              NGC … http… http…
+#> 4 O Chul K… 2001… There were… image      v1              Leon… http… http…
+#> 5 Joe Orman 1999… The Moon, … image      v1              Moon… http… http…
 ```
 
 ### Magic
@@ -111,7 +111,7 @@ save_image(m31$hdurl)
 Contact
 -------
 
-Come find me on twitter \[@astroeringand\](<https://twitter.com/astroeringrand>)
+Come find me on twitter @[astroeringand](https://twitter.com/astroeringrand)
 
 Code of Conduct
 ---------------
