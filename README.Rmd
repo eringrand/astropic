@@ -54,12 +54,17 @@ You can also supply a start and end date to get a range of image results back.
 ```{r}
 get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ```
+### Count - `n` random images
+```{r}
+get_apod(query = list(count = 5))
+```
 
 
+### Magic
 
 With a little `magick` you can also save the APOD image to your computer for use later. 
 This is a demostration of a picture in APOD I helped to create!
-```{r}
+```{r m31}
 library(magick)
 library(gmp)
 library(stringr)
@@ -81,7 +86,7 @@ pull(m31, explanation)
 save_image(m31$hdurl)
 ```
 
-![](man/figures/README/Swift_M31_large_UV70p.jpg)
+![](man/figures/README-m31-1.png)
 
 
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).

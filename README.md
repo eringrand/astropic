@@ -37,7 +37,7 @@ This is a basic example to retrive APOD data.
 ### Basic Example
 
 ``` r
-library(apodR)
+library(astropic)
 get_apod() # no inputs will get today's image
 #> Warning in strptime(x, fmt, tz = "GMT"): unknown timezone 'zone/tz/2018c.
 #> 1.0/zoneinfo/America/New_York'
@@ -60,6 +60,22 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 #> 2 <NA>      2018… While crui… http… image      v1              Moon… http…
 #> 3 Sergei M… 2018… You may ha… http… image      v1              The … http…
 ```
+
+### Count - `n` random images
+
+``` r
+get_apod(query = list(count = 5))
+#> # A tibble: 5 x 7
+#>   date       explanation      hdurl media_type service_version title url  
+#> * <chr>      <chr>            <chr> <chr>      <chr>           <chr> <chr>
+#> 1 2003-07-04 "Scattered debr… http… image      v1              N49'… http…
+#> 2 2003-04-01 A new constella… http… image      v1              A Ne… http…
+#> 3 2008-10-13 What telling im… http… image      v1              Cass… http…
+#> 4 2001-10-04 If not perfect,… http… image      v1              M74:… http…
+#> 5 2006-02-09 A gorgeous spir… http… image      v1              NGC … http…
+```
+
+### Magic
 
 With a little `magick` you can also save the APOD image to your computer for use later. This is a demostration of a picture in APOD I helped to create!
 
@@ -106,8 +122,8 @@ pull(m31, explanation)
 save_image(m31$hdurl)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-m31-1.png" width="100%" />
 
-![](man/figures/README/Swift_M31_large_UV70p.jpg)
+![](man/figures/README-m31-1.png)
 
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
