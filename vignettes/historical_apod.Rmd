@@ -26,8 +26,6 @@ data("hist_apod")
 str(hist_apod)
 ```
 
-The values contained https://github.com/nasa/apod-api
-
 - `copyright` The copyrite of the image if it's not in public domain.
 - `date` Date of image. Included in response because of default values.
 - `explanation` The supplied text explanation of the image.

@@ -17,3 +17,7 @@ Imports:
     httr (>= 1.0.0),
     tibble,
     jsonlite
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
