@@ -39,6 +39,7 @@ make_url <- function(query = NULL) {
 
 from_js <- function(rsp) {
   stopifnot(is_response(rsp))
+
   if (!is_json(rsp)) {
    stop("API did not return json", call. = FALSE)
   }
@@ -57,8 +58,6 @@ from_js <- function(rsp) {
 
   rsp <- httr::content(rsp, as = "text", encoding = "UTF-8")
   rsp <- jsonlite::fromJSON(rsp)
-
-
 
   return(rsp)
 }
@@ -84,7 +83,7 @@ rate_limit <- function(r) {
 nasa_key <- function() {
   pat <- Sys.getenv('NASA_KEY')
   if (identical(pat, "")) {
-    stop("Please set env var NASA_KEY to your NASA API access token",
+    stop("Please set envvar NASA_KEY to your NASA API access token",
          call. = FALSE)
   }
   pat

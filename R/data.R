@@ -1,8 +1,8 @@
 #' Historical APOD image data from 2007 - 2017
 #'
-#' @format A data frame with 53940 rows and 10 variables:
+#' @format A data frame with 3995 rows and 8 variables:
 #' \describe{
-#'   \item{copyright}{imge copyright, if not public domain}
+#'   \item{copyright}{image copyright, if not public domain}
 #'   \item{date}{Date of the image}
 #'   \item{explanation}{The supplied text explanation of the image, may have some HTML text still in it}
 #'   \item{hdurl}{The url for the high-resolution image}
