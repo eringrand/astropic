@@ -1,5 +1,5 @@
 Package: astropic
-Version: 0.0.0.9000
+Version: 0.0.1.0
 Title: Connection to APOD API
 Description: This package aims to make calling the APOD API easy and fun so you can get straight to the cool science!
 Authors@R: person("Erin", "Grand", email = "eringrand@gmail.com", role = c("aut", "cre"))
