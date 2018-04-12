@@ -19,5 +19,7 @@ Imports:
     jsonlite
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    magik,
+    tidytext
 VignetteBuilder: knitr
