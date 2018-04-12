@@ -3,7 +3,7 @@
 astropic
 ========
 
-The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days at a time) and some historical data in tibble format.
 
 Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton!
 
@@ -70,13 +70,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   copyright date  explanation hdurl media_type service_version title url  
-#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
-#> 1 Kfir Sim… 2015… Blown by f… http… image      v1              Shar… http…
-#> 2 <NA>      2007… Do extraso… http… image      v1              Atmo… http…
-#> 3 www.MrEc… 2001… Today, ear… http… image      v1              Diam… http…
-#> 4 <NA>      2002… At the cen… http… image      v1              At t… http…
-#> 5 "Milosla… 2018… Diffuse st… http… image      v1              Thre… http…
+#>   date  explanation hdurl media_type service_version title url   copyright
+#> * <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr> <chr>    
+#> 1 2012… What's tha… http… image      v1              Look… http… <NA>     
+#> 2 2017… Would the … http… image      v1              The … http… Evangelo…
+#> 3 1997… The giant … http… image      v1              Uran… http… <NA>     
+#> 4 2001… Why would … http… image      v1              Gala… http… <NA>     
+#> 5 2008… Staring ac… http… image      v1              Cat'… http… Vicent P…
 ```
 
 ### Magic
