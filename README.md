@@ -3,7 +3,7 @@
 astropic
 ========
 
-The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days at a time) and some historical data in tibble format.
 
 Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton!
 
