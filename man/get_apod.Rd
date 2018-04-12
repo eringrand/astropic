@@ -8,7 +8,7 @@ get_apod(query = NULL, print = FALSE)
 }
 \arguments{
 \item{query}{Query you want
-#' The query paramters are described on the \href{https://github.com/nasa/apod-api}{APOD API Github page}
+#' The query parameters are described on the \href{https://github.com/nasa/apod-api}{APOD API Github page}
 \itemize{
 \item \code{date} A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03).  Defaults to today's date.  Must be after 1995-06-16, the first day an APOD picture was posted.  There are no images for tomorrow available through this API.
 \item \code{hd} A boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
