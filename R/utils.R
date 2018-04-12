@@ -3,7 +3,6 @@
 #' date 	YYYY-MM-DD 	today 	The date of the APOD image to retrieve
 #' hd 	bool 	False 	Retrieve the URL for the high resolution image
 #' api_key 	string 	DEMO_KEY 	api.nasa.gov key for expanded usage
-#'
 
 #' make_url
 #' @param query The query you are GETing
@@ -89,3 +88,23 @@ nasa_key <- function() {
   pat
 }
 
+
+# Enables loading packages when necessary vs import
+try_require <- function(pkg, f) {
+
+  if (requireNamespace(pkg, quietly = TRUE)) {
+    library(pkg, character.only = TRUE)
+    return(invisible())
+  }
+
+  stop("Package `", pkg, "` required for `", f , "`.\n",
+       "Please install and try again.", call. = FALSE)
+}
+
+##----------------------------------------------------------------------------##
+##                           test date format                                 ##
+##----------------------------------------------------------------------------##
+
+test_date <- function(date) {
+  date <- as.Date(as.character(date), "%Y-%m-%d", tz = "UTC")
+}

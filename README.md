@@ -3,7 +3,7 @@
 astropic
 ========
 
-The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to suplly more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
 
 Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton!
 
@@ -22,15 +22,15 @@ API Key
 
 To start, you'll need a NASA API key. If you do not have one, you can get one [here](https://api.nasa.gov/index.html#apply-for-an-api-key). Once you put in your information, a key will be emailed to you.
 
-Save this to your enviorment as `NASA_KEY`. e.g `Sys.setenv(NASA_KEY = "YOURKEYHERE")`.
+Save this to your environment as `NASA_KEY`. e.g `Sys.setenv(NASA_KEY = "YOURKEYHERE")`.
 
 Query
 -----
 
-The query paramters are described on the [APOD API Github page](https://github.com/nasa/apod-api) as such...
+The query parameters are described on the [APOD API Github page](https://github.com/nasa/apod-api) as such...
 
 -   `date` A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03). Defaults to today's date. Must be after 1995-06-16, the first day an APOD picture was posted. There are no images for tomorrow available through this API.
--   `hd` A boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
+-   `hd` A Boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
 -   `count` A positive integer, no greater than 100. If this is specified then `count` randomly chosen images will be returned in a JSON array. Cannot be used in conjunction with `date` or `start_date` and `end_date`.
 -   `start_date` A string in YYYY-MM-DD format indicating the start of a date range. All images in the range from `start_date` to `end_date` will be returned in a JSON array. Cannot be used with `date`.
 -   `end_date` A string in YYYY-MM-DD format indicating that end of a date range. If `start_date` is specified without an `end_date` then `end_date` defaults to the current date.
@@ -38,7 +38,7 @@ The query paramters are described on the [APOD API Github page](https://github.c
 Example
 -------
 
-This is a basic example to retrive APOD data.
+This is a basic example to retrieve APOD data.
 
 ### Basic Example
 
@@ -48,7 +48,7 @@ get_apod() # no inputs will get today's image
 #> # A tibble: 1 x 7
 #>   date       explanation      hdurl media_type service_version title url  
 #>   <chr>      <chr>            <chr> <chr>      <chr>           <chr> <chr>
-#> 1 2018-04-04 The robotic rov… http… image      v1              Intr… http…
+#> 1 2018-04-11 Was this flash … http… image      v1              Fort… http…
 ```
 
 ### Providing a date range
@@ -70,38 +70,37 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 x 8
-#>   copyright date  explanation media_type service_version title url   hdurl
-#> * <chr>     <chr> <chr>       <chr>      <chr>           <chr> <chr> <chr>
-#> 1 Tor Even… 2013… Have you e… video      v1              Flow… http… <NA> 
-#> 2 <NA>      2013… Are astero… image      v1              Orbi… http… http…
-#> 3 <NA>      2016… How massiv… image      v1              NGC … http… http…
-#> 4 O Chul K… 2001… There were… image      v1              Leon… http… http…
-#> 5 Joe Orman 1999… The Moon, … image      v1              Moon… http… http…
+#>   copyright date  explanation hdurl media_type service_version title url  
+#> * <chr>     <chr> <chr>       <chr> <chr>      <chr>           <chr> <chr>
+#> 1 Kfir Sim… 2015… Blown by f… http… image      v1              Shar… http…
+#> 2 <NA>      2007… Do extraso… http… image      v1              Atmo… http…
+#> 3 www.MrEc… 2001… Today, ear… http… image      v1              Diam… http…
+#> 4 <NA>      2002… At the cen… http… image      v1              At t… http…
+#> 5 "Milosla… 2018… Diffuse st… http… image      v1              Thre… http…
 ```
 
 ### Magic
 
-With a little `magick` you can also save the APOD image to your computer for use later. This is a demostration of a picture in APOD I helped to create!
+With a little `magick` you can also save the APOD image to your computer for use later. This is a demonstration of a picture in APOD I helped to create!
 
 ``` r
 library(magick)
-library(gmp)
-library(stringr)
+library(here)
 library(dplyr)
 
 save_image <- function(url){
-  image <- try(image_read(url), silent = FALSE)
-  image_name <- stringr::str_extract(m31$hdurl, "([^\\/]+$)")
+  image <- try(magick::image_read(url), silent = FALSE)
+  image_name <- grep("([^\\/]+$)", m31$hdurl)
   image_loc <- here::here("man/figures/README", image_name)
   if(class(image)[1] != "try-error"){
     image %>%
-    image_write(image_loc)
+    magick::image_write(image_loc)
   }
   return(image)
 }
 
 m31 <- get_apod(query = list(date = "2009-09-17"))  # only providing a start date will give the image just for that day
-pull(m31, explanation)
+dplyr::pull(m31, explanation)
 #> [1] "Taken by a telescope onboard NASA's Swift satellite, this stunning vista represents the highest resolution image ever made of the Andromeda Galaxy (aka M31) - at ultraviolet wavelengths. The mosaic is composed of 330 individual images covering a region 200,000 light-years wide. It shows about 20,000 sources, dominated by hot, young stars and dense star clusters that radiate strongly in energetic ultraviolet light. Of course, the Andromeda Galaxy is the closest large spiral galaxy to our own Milky Way, at a distance of some 2.5 million light-years. To compare this gorgeous island universe's appearance in optical light with its ultraviolet portrait, just slide your cursor over the image.   digg_url ='http://apod.nasa.gov/apod/ap090917.html'; digg_skin = 'compact';"
 save_image(m31$hdurl)
 ```
