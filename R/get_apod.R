@@ -1,7 +1,7 @@
 #' @title get_apod
 #' @description This function retrieves data from the APOD API.
 #' @param query Query you want
-#' #' The query paramters are described on the [APOD API Github page](https://github.com/nasa/apod-api)
+#' #' The query parameters are described on the [APOD API Github page](https://github.com/nasa/apod-api)
 #' - `date` A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03).  Defaults to today's date.  Must be after 1995-06-16, the first day an APOD picture was posted.  There are no images for tomorrow available through this API.
 #' - `hd` A boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
 #' - `count` A positive integer, no greater than 100. If this is specified then `count` randomly chosen images will be returned in a JSON array. Cannot be used in conjunction with `date` or `start_date` and `end_date`.
