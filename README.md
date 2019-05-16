@@ -90,7 +90,7 @@ library(dplyr)
 
 save_image <- function(url){
   image <- try(magick::image_read(url), silent = FALSE)
-  image_name <- grep("([^\\/]+$)", m31$hdurl)
+  image_name <- gsub(".*/([^/]+$)", '\\1', m31$hdurl)
   image_loc <- here::here("man/figures/README", image_name)
   if(class(image)[1] != "try-error"){
     image %>%
