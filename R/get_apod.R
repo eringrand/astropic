@@ -26,6 +26,6 @@ get_apod <- function(query = NULL, print = FALSE) {
   url <- make_url(query = query)
   r <- httr::GET(url)
   r_list <- from_js(r)
-  if(print) print(paste("Your remaining API request limit this hour is", rate_limit(r)))
+  if (print) print(paste("Your remaining API request limit this hour is", rate_limit(r)))
   return(tibble::as_tibble(r_list))
 }

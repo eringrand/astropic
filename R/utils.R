@@ -11,22 +11,25 @@
 #' @noRd
 
 make_url <- function(query = NULL) {
-  if(is.null(query)) {
+  if (is.null(query)) {
     query <- list(api_key = nasa_key())
-  } else{
+  } else {
     query$api_key <- nasa_key()
   }
   url <- structure(
-    list(scheme = "https",
-         hostname = "api.nasa.gov",
-         path = "planetary/apod",
-         port = NULL,
-         parms = NULL,
-         fragment = NULL,
-         username = NULL,
-         password = NULL,
-         query = query),
-    class = "url")
+    list(
+      scheme = "https",
+      hostname = "api.nasa.gov",
+      path = "planetary/apod",
+      port = NULL,
+      parms = NULL,
+      fragment = NULL,
+      username = NULL,
+      password = NULL,
+      query = query
+    ),
+    class = "url"
+  )
   return(httr::build_url(url))
 }
 
@@ -40,7 +43,7 @@ from_js <- function(rsp) {
   stopifnot(is_response(rsp))
 
   if (!is_json(rsp)) {
-   stop("API did not return json", call. = FALSE)
+    stop("API did not return json", call. = FALSE)
   }
 
   if (httr::status_code(rsp) != 200) {
@@ -63,9 +66,9 @@ from_js <- function(rsp) {
 
 
 
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 ##                                 check data                                 ##
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 
 is_response <- function(x) {
   inherits(x, "response")
@@ -80,10 +83,11 @@ rate_limit <- function(r) {
 }
 
 nasa_key <- function() {
-  pat <- Sys.getenv('NASA_KEY')
+  pat <- Sys.getenv("NASA_KEY")
   if (identical(pat, "")) {
     stop("Please set envvar NASA_KEY to your NASA API access token",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   pat
 }
@@ -91,19 +95,20 @@ nasa_key <- function() {
 
 # Enables loading packages when necessary vs import
 try_require <- function(pkg, f) {
-
   if (requireNamespace(pkg, quietly = TRUE)) {
     library(pkg, character.only = TRUE)
     return(invisible())
   }
 
-  stop("Package `", pkg, "` required for `", f , "`.\n",
-       "Please install and try again.", call. = FALSE)
+  stop("Package `", pkg, "` required for `", f, "`.\n",
+    "Please install and try again.",
+    call. = FALSE
+  )
 }
 
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 ##                           test date format                                 ##
-##----------------------------------------------------------------------------##
+## ----------------------------------------------------------------------------##
 
 test_date <- function(date) {
   date <- as.Date(as.character(date), "%Y-%m-%d", tz = "UTC")

@@ -22,5 +22,6 @@ Suggests:
     knitr,
     rmarkdown,
     magik,
-    tidytext
+    tidytext,
+    testthat
 VignetteBuilder: knitr

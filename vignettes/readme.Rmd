@@ -7,21 +7,32 @@ vignette: >
   %\VignetteIndexEntry{Introduction to astropic}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
----
+------
+
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = here::here("man/figures/README-"),
+  out.width = "100%"
 )
 ```
 
-
 # astropic
 
-The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days ata time) and some historical data in tibble format.
+The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days at a time) and some historical data in tibble format.
 
+Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton! 
 
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("eringrand/astropic")
+```
 ## API Key
 To start, you'll need a NASA API key. If you do not have one, you can get one [here](https://api.nasa.gov/index.html#apply-for-an-api-key). Once you put in your information, a key will be emailed to you.
 
@@ -29,7 +40,7 @@ Save this to your environment as `NASA_KEY`. e.g `Sys.setenv(NASA_KEY = "YOURKEY
 
 
 ## Query
-The query parameters are described on the [APOD API Github page](https://github.com/nasa/apod-api)
+The query parameters are described on the [APOD API Github page](https://github.com/nasa/apod-api) as such...
 
 - `date` A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03).  Defaults to today's date.  Must be after 1995-06-16, the first day an APOD picture was posted.  There are no images for tomorrow available through this API.
 - `hd` A Boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
@@ -45,19 +56,18 @@ This is a basic example to retrieve APOD data.
 ### Basic Example
 ```{r example1, warning=FALSE}
 library(astropic)
-knitr::kable(get_apod()) # no inputs will get today's image
+get_apod() # no inputs will get today's image
 ```
 
 ### Providing a date range
 
 You can also supply a start and end date to get a range of image results back.
 ```{r}
-knitr::kable(get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03")))
+get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ```
-
 ### Count - `n` random images
 ```{r}
-knitr::kable(get_apod(query = list(count = 5)))
+get_apod(query = list(count = 5))
 ```
 
 
@@ -65,7 +75,6 @@ knitr::kable(get_apod(query = list(count = 5)))
 
 With a little `magick` you can also save the APOD image to your computer for use later. 
 This is a demonstration of a picture in APOD I helped to create!
-
 ```{r m31, message=FALSE, warning=FALSE}
 library(magick)
 library(here)
@@ -73,7 +82,7 @@ library(dplyr)
 
 save_image <- function(url){
   image <- try(magick::image_read(url), silent = FALSE)
-  image_name <- grep("([^\\/]+$)", m31$hdurl)
+  image_name <- gsub(".*/([^/]+$)", '\\1', m31$hdurl)
   image_loc <- here::here("man/figures/README", image_name)
   if(class(image)[1] != "try-error"){
     image %>%
@@ -86,6 +95,14 @@ m31 <- get_apod(query = list(date = "2009-09-17"))  # only providing a start dat
 dplyr::pull(m31, explanation)
 save_image(m31$hdurl)
 ```
+
+## Contact
+Come find me on twitter @[astroeringand](https://twitter.com/astroeringrand)
+
+## Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
+By participating in this project you agree to abide by its terms.
+
 
 ## Contact
 Come find me on twitter @[astroeringand](https://twitter.com/astroeringrand)

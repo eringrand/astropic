@@ -8,11 +8,14 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = here::here("man/figures/README-"),
   out.width = "100%"
 )
 ```
 
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/eringrand/astropic.svg?branch=master)](https://travis-ci.org/eringrand/astropic)
+<!-- badges: end -->
 # astropic
 
 The goal of `astropic` is to connect R to the NASA APOD API. The APOD API supports one image at a time. In order to supply more than that, this package also includes creating time ranges (of less than 1000 days at a time) and some historical data in tibble format.

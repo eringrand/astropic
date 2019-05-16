@@ -20,8 +20,12 @@ knitr::opts_chunk$set(
 ## Basics
 The `astropoc` package contains a dataset ready to be used with all the APOD information from 2007-2017.
 
-```{r}
+```{r}```{r init}
 library(astropic)
+library(tidytext)
+library(dplyr)
+library(ggplot2)
+library(viridis)
 data("hist_apod")
 str(hist_apod)
 ```
@@ -39,13 +43,6 @@ str(hist_apod)
 
 My favorite part of the APOD data is working with the `explanation` field. There's a ton of cool text analysis you can do with it.
 
-```{r init}
-library(astropic)
-library(tidytext)
-library(dplyr)
-library(ggplot2)
-data("hist_apod")
-```
 
 ```{r words}
 words <- hist_apod %>%
