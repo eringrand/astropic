@@ -5,3 +5,4 @@
 .Rbuildignore
 APODR.Rproj
 inst/doc
+.Rbuildignore
