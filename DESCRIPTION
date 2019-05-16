@@ -8,7 +8,7 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 BugReports: https://github.com/eringrand/astropic/issues
 Depends:
     R (>= 2.10)
@@ -16,7 +16,8 @@ Imports:
     purrr,
     httr (>= 1.0.0),
     tibble,
-    jsonlite
+    jsonlite,
+    magrittr
 Suggests: 
     knitr,
     rmarkdown,
