@@ -2,7 +2,8 @@
 .Rhistory
 .RData
 .httr-oauth
-.Rbuildignore
 APODR.Rproj
 inst/doc
 .Rbuildignore
+APODR.Proj
+.DS_Store
