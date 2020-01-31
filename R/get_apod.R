@@ -20,12 +20,13 @@
 #' - title: The title of image
 #' - url The url of image
 #' If there is an error with any images, there will also be an error column.
+#' @examples get_apod()
 #' @export
 
 get_apod <- function(query = NULL, print = FALSE) {
   url <- make_url(query = query)
   r <- httr::GET(url)
   r_list <- from_js(r)
-  if (print) print(paste("Your remaining API request limit this hour is", rate_limit(r)))
+  if (print) print(paste("Your remaining API request limit this hour is", rate_limit(r))) #  Hourly Limit: 1,000 requests per hour
   return(tibble::as_tibble(r_list))
 }
