@@ -1,3 +1,15 @@
+#' Internal Functions --------------------------------------------------------------------------------------------------------------------------------------
+nasa_key <- function() {
+  pat <- Sys.getenv("NASA_KEY")
+  if (identical(pat, "")) {
+    stop("Please set envvar NASA_KEY to your NASA API access token",
+         call. = FALSE
+    )
+  }
+  pat
+}
+
+
 #' Query Parameters
 #' Parameter 	Type 	Default 	Description
 #' date 	YYYY-MM-DD 	today 	The date of the APOD image to retrieve
@@ -32,6 +44,9 @@ make_url <- function(query = NULL) {
   )
   return(httr::build_url(url))
 }
+
+
+
 
 #' from_js
 #' @param rsp The api call result
@@ -82,15 +97,6 @@ rate_limit <- function(r) {
   httr::headers(r)$`x-ratelimit-remaining`
 }
 
-nasa_key <- function() {
-  pat <- Sys.getenv("NASA_KEY")
-  if (identical(pat, "")) {
-    stop("Please set envvar NASA_KEY to your NASA API access token",
-      call. = FALSE
-    )
-  }
-  pat
-}
 
 
 # Enables loading packages when necessary vs import
@@ -104,12 +110,4 @@ try_require <- function(pkg, f) {
     "Please install and try again.",
     call. = FALSE
   )
-}
-
-## ----------------------------------------------------------------------------##
-##                           test date format                                 ##
-## ----------------------------------------------------------------------------##
-
-test_date <- function(date) {
-  date <- as.Date(as.character(date), "%Y-%m-%d", tz = "UTC")
 }
