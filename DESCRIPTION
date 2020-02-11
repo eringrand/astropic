@@ -8,7 +8,7 @@ Encoding: UTF-8
 LazyData: true
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 BugReports: https://github.com/eringrand/astropic/issues
 Depends:
     R (>= 2.10)
@@ -23,5 +23,8 @@ Suggests:
     rmarkdown,
     magik,
     tidytext,
-    testthat
+    testthat,
+    ggplot2,
+    lubridate,
+    forcats
 VignetteBuilder: knitr
