@@ -34,7 +34,6 @@ try_date <- function(date_string) {
 
 try_date_lim <- limit_rate(try_date, rate(n = 1940, period = 3600))
 
-
 dates <- seq(ymd("2007-01-01"), ymd("2024-01-31"), by = "days") %>%
   as.character()
 
