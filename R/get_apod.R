@@ -20,9 +20,9 @@
 
 #' Others:
 #' - `resource` A dictionary describing the image_set or planet that the response illustrates, completely determined by the structured endpoint.
-#' - `concept_tags`` A Boolean reflection of the supplied option. Included in response because of default values.
+#' - `concept_tags` A Boolean reflection of the supplied option. Included in response because of default values.
 #' - `concepts` The most relevant concepts within the text explanation. Only supplied if concept_tags is set to True.
-#' - `thumbnail_url The URL of thumbnail of the video.
+#' - `thumbnail_url` The URL of thumbnail of the video.
 #' - `copyright` The name of the copyright holder.
 
 #' If there is an error with any images, there will also be an error column.
