@@ -28,6 +28,7 @@ make_url <- function(query = NULL) {
   } else {
     query$api_key <- nasa_key()
   }
+
   url <- structure(
     list(
       scheme = "https",
@@ -42,6 +43,7 @@ make_url <- function(query = NULL) {
     ),
     class = "url"
   )
+
   return(httr::build_url(url))
 }
 
@@ -55,13 +57,10 @@ make_url <- function(query = NULL) {
 #' @noRd
 
 from_js <- function(rsp) {
+
   stopifnot(is_response(rsp))
 
-  if (!is_json(rsp)) {
-    stop("API did not return json", call. = FALSE)
-  }
-
-  if (httr::status_code(rsp) != 200) {
+  if (httr::status_code(rsp) == 500 | httr::status_code(rsp) != 200) {
     stop(
       sprintf(
         "API request failed [%s]\n%s\n<%s>",
@@ -71,6 +70,10 @@ from_js <- function(rsp) {
       ),
       call. = FALSE
     )
+  }
+
+  if (!is_json(rsp)) {
+    stop("API did not return json", call. = FALSE)
   }
 
   rsp <- httr::content(rsp, as = "text", encoding = "UTF-8")
@@ -95,19 +98,4 @@ is_json <- function(x) {
 
 rate_limit <- function(r) {
   httr::headers(r)$`x-ratelimit-remaining`
-}
-
-
-
-# Enables loading packages when necessary vs import
-try_require <- function(pkg, f) {
-  if (requireNamespace(pkg, quietly = TRUE)) {
-    library(pkg, character.only = TRUE)
-    return(invisible())
-  }
-
-  stop("Package `", pkg, "` required for `", f, "`.\n",
-    "Please install and try again.",
-    call. = FALSE
-  )
 }

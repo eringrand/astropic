@@ -39,16 +39,30 @@ Save this to your environment as `NASA_KEY`. e.g `Sys.setenv(NASA_KEY = "YOURKEY
 ## Query
 The query parameters are described on the [APOD API Github page](https://github.com/nasa/apod-api) as such...
 
-- `date` A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03).  Defaults to today's date.  Must be after 1995-06-16, the first day an APOD picture was posted.  There are no images for tomorrow available through this API.
-- `hd` A Boolean parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
-- `count` A positive integer, no greater than 100. If this is specified then `count` randomly chosen images will be returned in a JSON array. Cannot be used in conjunction with `date` or `start_date` and `end_date`.
-- `start_date` A string in YYYY-MM-DD format indicating the start of a date range. All images in the range from `start_date` to `end_date` will be returned in a JSON array. Cannot be used with `date`.
+- `date` A string in YYYY-MM-DD format indicating the date of the APOD image (example: 2014-11-03). Defaults to today's date. Must be after 1995-06-16, the first day an APOD picture was posted. There are no images for tomorrow available through this API.
+- `concept_tags` A Boolean True|False indicating whether concept tags should be returned with the rest of the response. The concept tags are not necessarily included in the explanation, but rather derived from common search tags that are associated with the description text. (Better than just pure text search.) Defaults to False.
+- `hd` A Boolean True|False parameter indicating whether or not high-resolution images should be returned. This is present for legacy purposes, it is always ignored by the service and high-resolution urls are returned regardless.
+- `count` A positive integer, no greater than 100. If this is specified then count randomly chosen images will be returned in a JSON array. Cannot be used in conjunction with date or `start_date` and `end_date`.
+- `start_date` A string in YYYY-MM-DD format indicating the start of a date range. All images in the range from `start_date` to end_date will be returned in a JSON array. Cannot be used with date.
 - `end_date` A string in YYYY-MM-DD format indicating that end of a date range. If `start_date` is specified without an `end_date` then `end_date` defaults to the current date.
-
+thumbs A Boolean parameter True|False indicating whether the API should return a thumbnail image URL for video files. If set to True, the API returns URL of video thumbnail. If an APOD is not a video, this parameter is ignored.
 
 ## Example
 
 This is a basic example to retrieve APOD data. 
+
+### Returned fields
+
+- `date` Date of image. Included in response because of default values.
+ - `explanation` The supplied text explanation of the image.
+ - `hdurl` The URL for any high-resolution image for that day. Will be omitted in the response IF it does not exist originally at APOD.
+ - `media_type` The type of media (data) returned. May either be 'image' or 'video' depending on content.
+ - `service_version` The service version used.
+ - `title` The title of the image.
+ - `url` The URL of the APOD image or video of the day.
+ - `copyright` The name of the copyright holder.
+
+
 
 ### Basic Example
 ```{r example1, warning=FALSE}
@@ -70,8 +84,8 @@ get_apod(query = list(count = 5))
 
 ### Magic
 
-With a little `magick` you can also save the APOD image to your computer for use later. 
-This is a demonstration of a picture in APOD I helped to create!
+With a little `magick` you can also save the APOD image to your computer for use later. This is a demonstration of a picture in APOD I helped to create.
+
 ```{r m31, message=FALSE, warning=FALSE}
 library(magick)
 library(here)
@@ -95,6 +109,7 @@ save_image(m31$hdurl)
 
 ## Contact
 Come find me on twitter @[astroeringand](https://twitter.com/astroeringrand)
+
 
 ## Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
