@@ -32,7 +32,7 @@ Returns a \code{tibble} containing
 \item \code{url} The URL of the APOD image or video of the day.
 Others:
 \item \code{resource} A dictionary describing the image_set or planet that the response illustrates, completely determined by the structured endpoint.
-\item `concept_tags`` A Boolean reflection of the supplied option. Included in response because of default values.
+\item \code{concept_tags} A Boolean reflection of the supplied option. Included in response because of default values.
 \item \code{concepts} The most relevant concepts within the text explanation. Only supplied if concept_tags is set to True.
 \item \code{thumbnail_url} The URL of thumbnail of the video.
 \item \code{copyright} The name of the copyright holder.
