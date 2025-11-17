@@ -3,8 +3,6 @@
 .RData
 .httr-oauth
 .DS_Store
-.Rbuildignore
 inst/doc
 astropic.Rproj
-
 .quarto

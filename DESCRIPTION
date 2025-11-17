@@ -13,7 +13,6 @@ Depends:
     R (>= 3.5)
 Imports: 
     httr (>= 1.0.0),
-    tibble,
     jsonlite,
     dplyr
 Suggests: 
