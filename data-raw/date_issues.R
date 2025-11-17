@@ -1,5 +1,4 @@
-# FInd all dates with issues - rest for an hour im between 900 requests
-
+# Find all dates with issues - rest for an hour in between 900 requests
 library(ratelimitr)
 library(lubridate)
 library(purrr)
@@ -19,8 +18,7 @@ try_date <- function(date_string) {
 
 try_date_lim <- limit_rate(try_date, rate(n = 999, period = 3600))
 
-
-dates <- seq(ymd("2007-01-01"), ymd("2019-12-31"), by = "days") %>%
+dates <- seq(ymd("2007-01-01"), today(), by = "days") |>
   as.character()
 
 dates_w_issues <- map_chr(dates, try_date_lim)

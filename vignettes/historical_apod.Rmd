@@ -48,22 +48,22 @@ My favorite part of the APOD data is working with the `explanation` field. There
 
 
 ```{r words}
-words <- hist_apod %>%
-  dplyr::select(date, title, explanation, media_type) %>%
-  dplyr::mutate(year = lubridate::year(date)) %>%
-  tidytext::unnest_tokens(word, explanation, token = "words") %>%
+words <- hist_apod |>
+  dplyr::select(date, title, explanation, media_type) |>
+  dplyr::mutate(year = lubridate::year(date)) |>
+  tidytext::unnest_tokens(word, explanation, token = "words") |>
   dplyr::anti_join(tidytext::stop_words) 
 
 head(words)
 ```
 
 ```{r fig.height=4, fig.show='hold', fig.width=5}
-word_counts <- words %>%
-  dplyr::count(word, sort = TRUE) %>%
-  dplyr::top_n(10, n)  %>%
+word_counts <- words |>
+  dplyr::count(word, sort = TRUE) |>
+  dplyr::top_n(10, n)  |>
   dplyr::mutate(word = forcats::fct_rev(forcats::fct_inorder(word)))
 
-word_counts %>%
+word_counts |>
   ggplot2::ggplot(aes(x = n, y = word, xend = 0, yend = word, color = word)) +
   ggplot2::geom_segment(size = 1.1, show.legend = FALSE) +
   ggplot2::geom_text(aes(label = n), hjust = -0.25, show.legend = FALSE) +
@@ -80,15 +80,15 @@ word_counts %>%
 
 ## Example: Frequncy of Words by Year
 ```{r fig.height=3, fig.show='hold', fig.width=5}
-plot_dat <- words %>%
-  add_count(year) %>%
-  rename(nwords = n) %>%
-  count(year, nwords, word, sort = TRUE) %>%
-  mutate(freq = n / nwords) %>%
-  filter(word %in% c("galaxy", "planet", "sun", "nebula")) %>%
+plot_dat <- words |>
+  add_count(year) |>
+  rename(nwords = n) |>
+  count(year, nwords, word, sort = TRUE) |>
+  mutate(freq = n / nwords) |>
+  filter(word %in% c("galaxy", "planet", "sun", "nebula")) |>
   arrange(year)
 
-plot_dat %>% 
+plot_dat |> 
   ggplot2::ggplot(aes(x = year, y = freq, color = word)) +
   ggplot2::geom_line() +
   ggplot2::scale_x_continuous(breaks = seq(2007, 2017, 2), limits = c(2007, 2018)) +
