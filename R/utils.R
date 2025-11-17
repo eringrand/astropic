@@ -16,6 +16,7 @@ make_url <- function(query = NULL) {
   } else {
     query$api_key <- nasa_key()
   }
+
   url <- structure(
     list(
       scheme = "https",
@@ -40,21 +41,23 @@ make_url <- function(query = NULL) {
 #' @noRd
 
 from_js <- function(rsp) {
-  stopifnot(is_response(rsp))
+  if(! is_response(rsp)) {
+    stop("no response", call. = FALSE)
+  }
 
-  if (!is_json(rsp)) {
+  if (! is_json(rsp)) {
     stop("API did not return json", call. = FALSE)
   }
 
-  if (httr::status_code(rsp) != 200) {
+
+  if (httr::status_code(rsp) != 200 && httr::status_code(rsp) != 500) {
     stop(
       sprintf(
         "API request failed [%s]\n%s\n<%s>",
         httr::status_code(rsp),
         rsp$message,
         rsp$documentation_url
-      ),
-      call. = FALSE
+      )
     )
   }
 
@@ -63,6 +66,7 @@ from_js <- function(rsp) {
 
   return(rsp)
 }
+
 
 
 
@@ -79,37 +83,15 @@ is_json <- function(x) {
 }
 
 rate_limit <- function(r) {
-  httr::headers(r)$`x-ratelimit-remaining`
+  as.numeric(httr::headers(r)$`x-ratelimit-remaining`)
 }
 
 nasa_key <- function() {
   pat <- Sys.getenv("NASA_KEY")
   if (identical(pat, "")) {
-    stop("Please set envvar NASA_KEY to your NASA API access token",
-      call. = FALSE
-    )
+    stop("Set your envvar NASA_KEY to your NASA API access token.
+         Use 'usethis::edit_r_environ()'
+         to edit your environ file then restart R.")
   }
   pat
-}
-
-
-# Enables loading packages when necessary vs import
-try_require <- function(pkg, f) {
-  if (requireNamespace(pkg, quietly = TRUE)) {
-    library(pkg, character.only = TRUE)
-    return(invisible())
-  }
-
-  stop("Package `", pkg, "` required for `", f, "`.\n",
-    "Please install and try again.",
-    call. = FALSE
-  )
-}
-
-## ----------------------------------------------------------------------------##
-##                           test date format                                 ##
-## ----------------------------------------------------------------------------##
-
-test_date <- function(date) {
-  date <- as.Date(as.character(date), "%Y-%m-%d", tz = "UTC")
 }

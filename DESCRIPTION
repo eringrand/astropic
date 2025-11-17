@@ -21,10 +21,11 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    magik,
     tidytext,
-    testthat,
+    testthat (>= 2.1.0),
     ggplot2,
     lubridate,
-    forcats
+    forcats,
+    here,
+    magick
 VignetteBuilder: knitr

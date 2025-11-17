@@ -75,7 +75,8 @@ get_apod(query = list(count = 5))
 ### Magic
 
 With a little `magick` you can also save the APOD image to your computer for use later. 
-This is a demonstration of a picture in APOD I helped to create!
+This is a demonstration of a picture on APOD I helped to create.
+
 ```{r m31, message=FALSE, warning=FALSE}
 library(magick)
 library(here)
@@ -84,7 +85,7 @@ library(dplyr)
 save_image <- function(url){
   image <- try(magick::image_read(url), silent = FALSE)
   image_name <- gsub(".*/([^/]+$)", '\\1', m31$hdurl)
-  image_loc <- here::here("man/figures/README", image_name)
+  image_loc <- here::here("man/figures/README", image_name) # location of the saved image file
   if(class(image)[1] != "try-error"){
     image %>%
     magick::image_write(image_loc)

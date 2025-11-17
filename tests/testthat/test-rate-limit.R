@@ -9,3 +9,4 @@ test_that("rate_limit returns rate_limit data", {
 
   expect_equal(is.numeric(x), TRUE)
 })
+

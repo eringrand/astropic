@@ -20,12 +20,15 @@ knitr::opts_chunk$set(
 ## Basics
 The `astropoc` package contains a dataset ready to be used with all the APOD information from 2007-2017.
 
-```{r}```{r init}
+```{r init}
 library(astropic)
 library(tidytext)
 library(dplyr)
 library(ggplot2)
-library(viridis)
+library(tidytext)
+library(lubridate)
+library(forcats)
+
 data("hist_apod")
 str(hist_apod)
 ```
@@ -46,40 +49,37 @@ My favorite part of the APOD data is working with the `explanation` field. There
 
 ```{r words}
 words <- hist_apod %>%
-  select(date, title, explanation, media_type) %>%
-  mutate(year = lubridate::year(date)) %>%
+  dplyr::select(date, title, explanation, media_type) %>%
+  dplyr::mutate(year = lubridate::year(date)) %>%
   tidytext::unnest_tokens(word, explanation, token = "words") %>%
-  anti_join(tidytext::stop_words) 
+  dplyr::anti_join(tidytext::stop_words) 
+
+head(words)
 ```
 
 ```{r fig.height=4, fig.show='hold', fig.width=5}
 word_counts <- words %>%
-  count(word, sort = TRUE) %>%
-  top_n(10, n)  %>%
-  mutate(word = forcats::fct_rev(forcats::fct_inorder(word)))
+  dplyr::count(word, sort = TRUE) %>%
+  dplyr::top_n(10, n)  %>%
+  dplyr::mutate(word = forcats::fct_rev(forcats::fct_inorder(word)))
 
 word_counts %>%
-  ggplot(aes(x = n, y = word, xend = 0, yend = word, color = word)) +
-  geom_point(size = 1.1, show.legend = FALSE) +
-  geom_segment(size = 1.1, show.legend = FALSE) +
-  geom_text(aes(label = n), hjust = -0.25, show.legend = FALSE) +
-  labs(x = "", y = "",
+  ggplot2::ggplot(aes(x = n, y = word, xend = 0, yend = word, color = word)) +
+  ggplot2::geom_segment(size = 1.1, show.legend = FALSE) +
+  ggplot2::geom_text(aes(label = n), hjust = -0.25, show.legend = FALSE) +
+  ggplot2::labs(x = "", y = "",
        title = "APOD Word Counts",
        subtitle = "2007-2017") +
-  theme_classic(base_size = 14) +
-  theme(axis.title.x = element_blank(),
-        axis.text.x = element_blank(),
-        axis.ticks = element_blank(),
-        axis.line = element_blank()) +
-  scale_x_continuous(limits = c(0, max(word_counts$n) + 400)) +
-  viridis::scale_color_viridis(discrete = TRUE, option = "A", end = 0.9)
+  ggplot2::theme_classic(base_size = 14) +
+  ggplot2::theme(axis.title.x = ggplot2::element_blank(),
+        axis.text.x = ggplot2::element_blank(),
+        axis.ticks = ggplot2::element_blank(),
+        axis.line = ggplot2::element_blank()) +
+  ggplot2::scale_x_continuous(limits = c(0, max(word_counts$n) + 400)) 
 ```
 
 ## Example: Frequncy of Words by Year
 ```{r fig.height=3, fig.show='hold', fig.width=5}
-library(ggrepel)
-library(viridis)
-
 plot_dat <- words %>%
   add_count(year) %>%
   rename(nwords = n) %>%
@@ -89,23 +89,14 @@ plot_dat <- words %>%
   arrange(year)
 
 plot_dat %>% 
-  ggplot(aes(x = year, y = freq, color = word)) +
-  geom_line(show.legend = FALSE) +
-  scale_x_continuous(breaks = seq(2007, 2017, 2), limits = c(2007, 2018)) +
-  scale_y_continuous(labels = scales::percent) +
-  viridis::scale_color_viridis(discrete = TRUE, option = "A", end = 0.9) +
-  ggrepel::geom_text_repel(
-    data = subset(plot_dat, year == max(year)),
-    aes(label = word),
-    size = 4,
-    nudge_x = .5,
-    segment.color = NA
-  ) +
+  ggplot2::ggplot(aes(x = year, y = freq, color = word)) +
+  ggplot2::geom_line() +
+  ggplot2::scale_x_continuous(breaks = seq(2007, 2017, 2), limits = c(2007, 2018)) +
+  ggplot2::scale_y_continuous(labels = scales::percent) +
   labs(x = "Year", y = "Frequency of Word", 
        title = "Comparing Frequencies over the Years",
        subtitle = "APOD 2007 - 2017") +
-  theme_classic(base_size = 14) +
-  theme(legend.position = "none") 
+  theme_classic(base_size = 14) 
 ```
 
 

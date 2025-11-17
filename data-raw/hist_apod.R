@@ -5,25 +5,27 @@ library(lubridate)
 library(janitor)
 library(astropic)
 
-# Some dates just don't work - unknown why
+# Some dates just don't work - likely because the files are not videos or pictures - e.g. flash anitmations
 error_dates <- tibble::tibble(date = c("2007-05-22", "2007-12-18", "2008-12-31", "2009-04-05",
                  "2009-04-13", "2009-06-29", "2009-08-10", "2010-01-20",
                  "2010-01-24", "2010-05-10", "2010-05-26", "2010-06-08",
                  "2010-07-25", "2010-08-25", "2010-12-15", "2011-01-23",
                  "2011-02-01", "2011-02-22", "2011-03-07", "2012-03-12",
-                 "2012-05-23", "2014-01-12", "2014-02-10")) %>%
+                 "2012-05-23", "2014-01-12", "2014-02-10",
+                 "2018-10-07")
+                 ) %>%
   mutate(year = year(ymd(date)))
-
 
 
 # Start at Jan 1st and end on Dec 31st ------------------------------------
 hist_apod_func <- function(y) {
+  print(y)
   start_date <- ymd(paste0(y, "-01-01"))
   end_date <- ymd(paste0(y, "-12-31"))
 
   # Finds dates that ERROR in year
   errors <- error_dates %>%
-    filter(year  == y) %>%
+    filter(year == y) %>%
     mutate(date = ymd(date)) %>%
     arrange(date) %>%
     pull(date)
@@ -66,7 +68,7 @@ hist_apod_func <- function(y) {
 
 
 # Run for each Year from 2007 - 2017 ------
-year_list <- seq(2007L, 2017L, 1)
+year_list <- seq(2019L, 2019L, 1)
 
 # create safe function
 

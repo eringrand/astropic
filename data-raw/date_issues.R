@@ -24,3 +24,4 @@ dates <- seq(ymd("2007-01-01"), ymd("2019-12-31"), by = "days") %>%
   as.character()
 
 dates_w_issues <- map_chr(dates, try_date_lim)
+readr::write_rds(dates_w_issues, here::here("data-raw/dates_w_issues.csv"))
