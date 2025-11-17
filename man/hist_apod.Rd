@@ -4,7 +4,8 @@
 \name{hist_apod}
 \alias{hist_apod}
 \title{Historical APOD image data from 2007 - 2017}
-\format{A data frame with 3995 rows and 8 variables:
+\format{
+A data frame with 3995 rows and 8 variables:
 \describe{
 \item{copyright}{image copyright, if not public domain}
 \item{date}{Date of the image}
@@ -14,7 +15,8 @@
 \item{service_version}{unknown}
 \item{title}{The title of image}
 \item{url}{The url of image}
-}}
+}
+}
 \usage{
 hist_apod
 }

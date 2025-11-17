@@ -38,3 +38,6 @@ If there is an error with any images, there will also be an error column.
 \description{
 This function retrieves data from the APOD API.
 }
+\examples{
+get_apod()
+}

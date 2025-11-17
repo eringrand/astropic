@@ -2,9 +2,8 @@
 .Rhistory
 .RData
 .httr-oauth
-APODR.Rproj
-inst/doc
-.Rbuildignore
-APODR.Proj
 .DS_Store
+.Rbuildignore
+inst/doc
 astropic.Rproj
+

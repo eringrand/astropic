@@ -28,5 +28,6 @@ get_apod <- function(query = NULL, print = FALSE) {
   r <- httr::GET(url)
   r_list <- from_js(r)
   if (print) print(paste("Your remaining API request limit this hour is", rate_limit(r))) #  Hourly Limit: 1,000 requests per hour
+  #TODO check rate limit
   return(tibble::as_tibble(r_list))
 }

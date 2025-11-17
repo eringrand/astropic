@@ -13,7 +13,7 @@ error_dates <- tibble::tibble(date = c("2007-05-22", "2007-12-18", "2008-12-31",
                  "2011-02-01", "2011-02-22", "2011-03-07", "2012-03-12",
                  "2012-05-23", "2014-01-12", "2014-02-10",
                  "2018-10-07")
-                 ) %>%
+                 ) |>
   mutate(year = year(ymd(date)))
 
 
@@ -24,10 +24,10 @@ hist_apod_func <- function(y) {
   end_date <- ymd(paste0(y, "-12-31"))
 
   # Finds dates that ERROR in year
-  errors <- error_dates %>%
-    filter(year == y) %>%
-    mutate(date = ymd(date)) %>%
-    arrange(date) %>%
+  errors <- error_dates |>
+    filter(year == y) |>
+    mutate(date = ymd(date)) |>
+    arrange(date) |>
     pull(date)
 
   err_len <- length(errors)
