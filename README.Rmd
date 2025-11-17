@@ -141,7 +141,7 @@ save_image(m31$hdurl)
 ```
 
 ## Contact
-Come find me on twitter and BlueSky @[astroeringand](https://twitter.com/astroeringrand)
+Come find me on BlueSky @[@astroeringrand.bsky.social](https://bsky.app/profile/astroeringrand.bsky.social)
 
 ## Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).

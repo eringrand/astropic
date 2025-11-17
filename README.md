@@ -156,13 +156,13 @@ get_apod(query  = list(start_date = "2018-04-01", end_date = "2018-04-03"))
 ``` r
 get_apod(query = list(count = 5))
 #> # A tibble: 5 × 8
-#>   copyright       date  explanation media_type service_version title url   hdurl
-#>   <chr>           <chr> <chr>       <chr>      <chr>           <chr> <chr> <chr>
-#> 1 "\nPaolo Lazza… 2021… "Many thin… video      v1              Vide… http… <NA> 
-#> 2  <NA>           1995… "July 17, … image      v1              Bars… http… http…
-#> 3  <NA>           2011… "Tycho cra… image      v1              Sunr… http… http…
-#> 4  <NA>           2006… "If you co… image      v1              Clou… http… http…
-#> 5 "Adam Block"    2008… "One of th… image      v1              The … http… http…
+#>   date       explanation  hdurl media_type service_version title url   copyright
+#>   <chr>      <chr>        <chr> <chr>      <chr>           <chr> <chr> <chr>    
+#> 1 1997-11-11 The sky tow… http… image      v1              The … http…  <NA>    
+#> 2 2016-06-14 Here lie fa… http… image      v1              The … http… "\nEzequ…
+#> 3 2021-10-26 Observe the… <NA>  video      v1              Jupi… http… "\nJL Da…
+#> 4 2015-03-14 Thursday, s… http… image      v1              Retu… http…  <NA>    
+#> 5 2010-03-27 Stark shado… http… image      v1              Hesi… http… "Stefan …
 ```
 
 ### Magic
@@ -194,12 +194,10 @@ dplyr::pull(m31, explanation)
 
     save_image(m31$hdurl)
 
-<img src="man/figures/README-m31-1.png" width="100%" />
-
 ## Contact
 
-Come find me on twitter and BlueSky
-@[astroeringand](https://twitter.com/astroeringrand)
+Come find me on BlueSky
+@[@astroeringrand.bsky.social](https://bsky.app/profile/astroeringrand.bsky.social)
 
 ## Code of Conduct
 
