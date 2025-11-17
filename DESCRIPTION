@@ -24,6 +24,7 @@ Suggests:
     lubridate,
     forcats,
     here,
-    magick
+    magick,
+    scales
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
