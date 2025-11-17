@@ -12,7 +12,7 @@ error_dates <- data.frame(date = c("2007-05-22", "2007-12-18", "2008-12-31", "20
                  "2010-07-25", "2010-08-25", "2010-12-15", "2011-01-23",
                  "2011-02-01", "2011-02-22", "2011-03-07", "2012-03-12",
                  "2012-05-23", "2014-01-12", "2014-02-10",
-                 "2018-10-07")
+                 "2018-10-07", "2020-06-10")
                  ) |>
   mutate(year = year(ymd(date)))
 
@@ -65,15 +65,13 @@ hist_apod_func <- function(y) {
 
 
 
-# # Run for each Year from 2007 - 2017 ------
-# year_list <- seq(2019L, 2019L, 1)
-#
-# # create safe function
-#
-# # WARNING: this can take a long time
-# # hist_apod <- map_dfr(year_list, hist_apod_func)
-#
-#
-#
-# # Push Data to Data/Folder
-# usethis::use_data(hist_apod, overwrite = FALSE)
+# Run for each Year from 2007 - 2017 ------
+year_list <- seq(2020L, 2024, 1)
+
+# WARNING: this can take a long time depending on the date range
+hist_apod <- map_dfr(year_list, hist_apod_func)
+new_apod <- get_apod(query = list(start_date = "2025-01-01", end_date = "2025-11-16"))
+write_rds(new_apod, "data-raw/rds/2025_through_Nov.rds")
+
+
+

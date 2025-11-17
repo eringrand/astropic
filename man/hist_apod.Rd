@@ -3,9 +3,9 @@
 \docType{data}
 \name{hist_apod}
 \alias{hist_apod}
-\title{Historical APOD image data from 2007 - 2017}
+\title{Historical APOD image data from 2007 - 2025}
 \format{
-A data frame with 3995 rows and 8 variables:
+A data frame with 7304 rows and 8 variables:
 \describe{
 \item{copyright}{image copyright, if not public domain}
 \item{date}{Date of the image}
@@ -21,6 +21,6 @@ A data frame with 3995 rows and 8 variables:
 hist_apod
 }
 \description{
-Historical APOD image data from 2007 - 2017
+Historical APOD image data from 2007 - 2025
 }
 \keyword{datasets}
