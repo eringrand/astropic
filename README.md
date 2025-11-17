@@ -2,11 +2,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- <!-- badges: start -->
-
-–\>
 <!-- [![Travis build status](https://travis-ci.org/eringrand/astropic.svg?branch=master)](https://travis-ci.org/eringrand/astropic) -->
-<!-- <!-- badges: end --> –\>
-
+<!-- <!-- badges: end --> 
 # astropic
 
 The goal of `astropic` is to connect R to the [NASA APOD
