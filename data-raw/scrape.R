@@ -14,7 +14,7 @@ if(file.exists(glue::glue("rds/{date}.csv"))) {
     next
 }
 
-today_pic <- get_apod(query = list(end_date = today))
+today_pic <- get_apod(query = list(date = today))
 
 # Write out data
 readr::write_rds(today_pic, glue::glue("data-raw/rds/{date}.rds"))

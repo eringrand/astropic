@@ -139,7 +139,6 @@ dplyr::pull(m31, explanation)
 ```
 save_image(m31$hdurl)
 ```
-<img src="man/figures/README-m31-1.png" width="100%" />
 
 ## Contact
 Come find me on twitter and BlueSky @[astroeringand](https://twitter.com/astroeringrand)

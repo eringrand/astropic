@@ -1,16 +1,27 @@
-#' Query Parameters
-#' Parameter 	Type 	Default 	Description
-#' date 	YYYY-MM-DD 	today 	The date of the APOD image to retrieve
-#' hd 	bool 	False 	Retrieve the URL for the high resolution image
-#' api_key 	string 	DEMO_KEY 	api.nasa.gov key for expanded usage
-
 #' make_url
 #' @param query The query you are GETing
 #' @return URL used in httr call
 #' @keywords internal
 #' @noRd
 
+check_query <- function(query) {
+  check <- dplyr::case_when(is.null(query) ~ TRUE,
+            "count" %in% names(query) & "start_date" %in% names(query) ~ FALSE,
+            "count" %in% names(query) & "end_date" %in% names(query) ~ FALSE,
+            "count" %in% names(query) & "date" %in% names(query) ~ FALSE,
+            "start_date" %in% names(query) & "date" %in% names(query) ~ FALSE,
+            "end_date" %in% names(query) & "date" %in% names(query) ~ FALSE,
+            length(setdiff(names(query), c("start_date", "end_date", "date", "count"))) > 0 ~ FALSE,
+            length(setdiff(names(query), c("start_date", "end_date", "date", "count"))) == 0 ~ TRUE
+            )
+
+}
+
 make_url <- function(query = NULL) {
+  if (! check_query(query)) {
+    stop("Query contains information not allowed by API")
+  }
+
   if (is.null(query)) {
     query <- list(api_key = nasa_key())
   } else {
@@ -88,11 +99,13 @@ rate_limit <- function(r) {
 
 nasa_key <- function() {
   pat <- Sys.getenv("NASA_KEY")
+
   if (identical(pat, "")) {
     stop("Set your envvar NASA_KEY to your NASA API access token.
          Use 'usethis::edit_r_environ()'
          to edit your environ file then restart R.")
   }
+
   pat
 }
 

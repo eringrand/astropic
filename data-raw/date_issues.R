@@ -2,12 +2,13 @@
 library(ratelimitr)
 library(lubridate)
 library(purrr)
+library(astropic)
 
 try_date <- function(date_string) {
-  url <- astropic:::make_url(query = list(date = date_string))
+  url <- make_url(query = list(date = date_string))
   rsp <- httr::GET(url)
   code <- httr::status_code(rsp)
-  limit <- astropic:::rate_limit(rsp) #  Hourly Limit: 1,000 requests per hour
+  limit <- rate_limit(rsp)
   if(code == 500) {
     return(date_string)
   }
