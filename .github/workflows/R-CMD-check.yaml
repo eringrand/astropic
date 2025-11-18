@@ -12,6 +12,10 @@ permissions: read-all
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      NASA_KEY: ${{ secrets.NASA_KEY }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
