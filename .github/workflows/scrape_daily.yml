@@ -24,7 +24,7 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
-          github::eringrand/astropic
+            github::eringrand/astropic
 
       # Execute the script
       - name: Run a script with a secret
