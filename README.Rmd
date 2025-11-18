@@ -13,9 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-<!-- <!-- badges: start --> -->
-<!-- [![Travis build status](https://travis-ci.org/eringrand/astropic.svg?branch=master)](https://travis-ci.org/eringrand/astropic) -->
-<!-- <!-- badges: end --> -->
+<!-- badges: start -->
+[![codecov](https://codecov.io/gh/eringrand/astropic/graph/badge.svg?token=5HHWM5HDHE)](https://codecov.io/gh/eringrand/astropic)
+[![R-CMD-check](https://github.com/EvalResearchAtTRAILS/trails_r_packge_tbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml)
+
+<!-- badges: end -->
 
 # astropic
 
