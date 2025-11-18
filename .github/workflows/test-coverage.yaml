@@ -12,6 +12,7 @@ permissions: read-all
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
+    
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NASA_KEY: ${{ secrets.NASA_KEY }}
