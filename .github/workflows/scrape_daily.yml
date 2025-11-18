@@ -14,8 +14,8 @@ jobs:
     steps:
       # Checkout this repo
       - uses: actions/checkout@v5
-      with:
-        ref: 'daily-data'
+        with:
+          ref: 'daily-data'
 
       # Install R
       - uses: r-lib/actions/setup-r@v2
