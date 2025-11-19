@@ -1,6 +1,6 @@
 # Contributing to apodR
 
-This outlines how to propose a change to apodR. For more detailed
+This outlines how to propose a change to `astropic`. For more detailed
 info about contributing to this, and other tidyverse packages, please see the
 [**development contributing guide**](https://rstd.io/tidy-contrib).
 
