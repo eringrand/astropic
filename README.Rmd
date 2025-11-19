@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![codecov](https://codecov.io/gh/eringrand/astropic/graph/badge.svg?token=5HHWM5HDHE)](https://codecov.io/gh/eringrand/astropic)
-[![R-CMD-check](https://github.com/EvalResearchAtTRAILS/trails_r_packge_tbd/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check.yaml](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml)
 
 <!-- badges: end -->
 

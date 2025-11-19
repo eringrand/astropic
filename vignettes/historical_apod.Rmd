@@ -33,12 +33,11 @@ data("hist_apod")
 str(hist_apod)
 ```
 
-- `copyright` The copyrite of the image if it's not in public domain.
-- `date` Date of image. Included in response because of default values.
+- `copyright` The copyright of the image if it's not in public domain.
+- `date` Date of image
 - `explanation` The supplied text explanation of the image.
 - `hdurl` The URL for any high-resolution image for that day. Returned regardless of 'hd' param setting but will be ommited in the response IF it does not exist originally at APOD.
 - `media_type` The type of media (data) returned. May either be 'image' or 'video' depending on content.
-- `service_version` Version of the image
 - `title` The title of the image.
 - `url` The URL of the APOD image or video of the day.
 

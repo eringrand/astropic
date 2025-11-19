@@ -7,7 +7,6 @@
 #'   \item{explanation}{The supplied text explanation of the image, may have some HTML text still in it}
 #'   \item{hdurl}{The url for the high-resolution image}
 #'   \item{media_type}{The type of media returned. May either be 'image' or 'video' depending on content}
-#'   \item{service_version}{unknown}
 #'   \item{title}{The title of image}
 #'   \item{url}{The url of image}
 #' }
