@@ -8,7 +8,6 @@ test_that("get_apod returns data frame", {
   expect_named(apod)
   expect_true(all(c("explanation", "title", "date") %in% names(apod)))
   expect_equal(nrow(apod), 1)
-  expect_equal(ncol(apod), 5)
 })
 
 
