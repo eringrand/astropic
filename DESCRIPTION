@@ -25,6 +25,7 @@ Suggests:
     forcats,
     here,
     magick,
-    scales
+    scales,
+    readr
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
