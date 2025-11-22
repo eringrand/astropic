@@ -4,7 +4,7 @@ library(readr)
 
 # Set up what days we want data
 start_date <- ymd("2007-01-01")
-today <- today()
+today <- today() - 1
 
 days_wanted <- seq(start_date, today, by = 1)
 
