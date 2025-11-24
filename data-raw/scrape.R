@@ -7,4 +7,4 @@ today <- today() - 1
 today_pic <- get_apod(query = list(date = today))
 
 # Write out data
-readr::write_rds(today_pic, glue::glue("data-raw/rds/{date}.rds"))
+readr::write_rds(today_pic, glue::glue("data-raw/rds/{today}.rds"))
