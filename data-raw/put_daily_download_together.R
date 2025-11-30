@@ -3,7 +3,7 @@ library(purrr)
 library(lubridate)
 library(readr)
 
-rm(hist_apod)
+rm("hist_apod")
 
 # Some dates just don't work - likely because the files are not videos or pictures - e.g. flash animations
 error_dates <- read_rds("data-raw/dates_w_issues.rds") |> 
@@ -34,5 +34,6 @@ hist_apod_extra <- map_dfr(list.files("data-raw/rds", full.names = TRUE), read_r
 hist_apod <- hist_apod |> 
   bind_rows(hist_apod_extra) |> 
   distinct()
+
 # Push Data to Data/Folder
 usethis::use_data(hist_apod, overwrite = TRUE)
