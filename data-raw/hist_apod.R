@@ -5,17 +5,21 @@ library(lubridate)
 library(janitor)
 library(astropic)
 
-# Some dates just don't work - likely because the files are not videos or pictures - e.g. flash animations
-error_dates <- data.frame(date = c("2007-05-22", "2007-12-18", "2008-12-31", "2009-04-05",
-                 "2009-04-13", "2009-06-29", "2009-08-10", "2010-01-20",
-                 "2010-01-24", "2010-05-10", "2010-05-26", "2010-06-08",
-                 "2010-07-25", "2010-08-25", "2010-12-15", "2011-01-23",
-                 "2011-02-01", "2011-02-22", "2011-03-07", "2012-03-12",
-                 "2012-05-23", "2014-01-12", "2014-02-10",
-                 "2018-10-07", "2020-06-10")
-                 ) |>
-  mutate(year = year(ymd(date)))
+safeapod <- safely(get_apod)
 
+# Some dates just don't work - likely because the files are not videos or pictures - e.g. flash animations
+error_dates <- read_rds("data-raw/dates_w_issues.rds") |> 
+  filter(code == "404")  
+  
+data_dates <- hist_apod |> 
+  distinct(date) 
+
+do_not_want_dates <- bind_rows(data_dates, error_dates) |> 
+  select(date) |> 
+  mutate(year = year(ymd(date)),
+         date = ymd(date)
+         ) |>
+  filter(! is.na(date))
 
 # Start at Jan 1st and end on Dec 31st ------------------------------------
 hist_apod_func <- function(y) {
@@ -23,9 +27,8 @@ hist_apod_func <- function(y) {
   end_date <- ymd(paste0(y, "-12-31"))
 
   # Finds dates that ERROR in year
-  errors <- error_dates |>
+  errors <- do_not_want_dates |>
     filter(year == y) |>
-    mutate(date = ymd(date)) |>
     arrange(date) |>
     pull(date)
 
@@ -60,18 +63,15 @@ hist_apod_func <- function(y) {
       x[[name]] <- list(start_date = errors[i] + 1, end_date = errors[i + 1] - 1)
     }
   }
-  return(map_dfr(x, ~get_apod(query = .x)))
+  
+  return(map(x, ~safeapod(query = .x)))
 }
 
+hist_apod_func_lim <- ratelimitr::limit_rate(hist_apod_func, ratelimitr::rate(n = 1500, period = 3600))
 
-
-# Run for each Year from 2007 - 2017 ------
-year_list <- seq(2020L, 2024, 1)
+# Run for each Year from 2007 ------
+year_list <- seq(2007, 2025, 1)
 
 # WARNING: this can take a long time depending on the date range
-hist_apod <- map_dfr(year_list, hist_apod_func)
-new_apod <- get_apod(query = list(start_date = "2025-01-01", end_date = "2025-11-16"))
-write_rds(new_apod, "data-raw/rds/2025_through_Nov.rds")
-
-
-
+hist_apod_missing <- map_dfr(year_list, hist_apod_func_lim)
+write_rds(hist_apod_missing, "data-raw/rds/hist_OLD_apod_missing.rds")
