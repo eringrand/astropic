@@ -57,6 +57,8 @@ head(words)
 ```
 
 ```{r fig.height=4, fig.show='hold', fig.width=5}
+minmax_year <- words |> summarise(min = min(year), max = max(year))
+
 word_counts <- words |>
   count(word, sort = TRUE) |>
   top_n(10, n)  |>
@@ -68,7 +70,7 @@ word_counts |>
   geom_text(aes(label = n), hjust = -0.25, show.legend = FALSE) +
   labs(x = "", y = "",
        title = "APOD Word Counts",
-       subtitle = "2007-2017") +
+       subtitle = glue::glue("{pull(minmax_year, min)}-{pull(minmax_year, max)}")) +
   theme_classic(base_size = 14) +
   theme(axis.title.x = ggplot2::element_blank(),
         axis.text.x = ggplot2::element_blank(),
@@ -90,11 +92,12 @@ plot_dat <- words |>
 plot_dat |> 
   ggplot(aes(x = year, y = freq, color = word)) +
   geom_line() +
-  scale_x_continuous(breaks = seq(2007, 2017, 2), limits = c(2007, 2018)) +
+  scale_x_continuous(breaks = seq(2007, 2025, 2), limits = c(2007, 2025)) +
   scale_y_continuous(labels = scales::percent) +
   labs(x = "Year", y = "Frequency of Word", 
        title = "Comparing Frequencies over the Years",
-       subtitle = "APOD 2007 - 2017") +
+       subtitle = glue::glue("APOD {pull(minmax_year, min)}-{pull(minmax_year, max)}")
+       ) +
   theme_classic(base_size = 14) 
 ```
 

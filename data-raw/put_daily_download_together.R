@@ -28,7 +28,7 @@ dates_with_img <- apod_daily |>
 days_wanted <- seq(ymd("2007-01-01"), today(), by = 1)
 
 days_missing <- days_wanted |> 
-  # setdiff(dates_with_img) |>
+  setdiff(dates_with_img) |>
   setdiff(ymd(pull(error_dates, date))) |>
   setdiff(data_dates) |> 
   as.Date()
