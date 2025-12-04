@@ -18,16 +18,17 @@ data_dates <- hist_apod |>
   mutate(date = ymd(date)) |>
   pull(date)
 
-apod_daily <- map_dfr(list.files("data-raw/rds", full.names = TRUE), read_rds) 
+apod_daily <- map_dfr(list.files("data-raw/rds", full.names = TRUE), read_rds)
 
-dates_with_img <- apod_daily |> 
+dates_with_img <- apod_daily |>
   distinct(date) |>
   mutate(date = ymd(date)) |>
-  pull(date) 
+  pull(date)
 
 days_wanted <- seq(ymd("2007-01-01"), today(), by = 1)
 
-days_missing <- setdiff(days_wanted, dates_with_img) |>
+days_missing <- days_wanted |> 
+  # setdiff(dates_with_img) |>
   setdiff(ymd(pull(error_dates, date))) |>
   setdiff(data_dates) |> 
   as.Date()
@@ -36,7 +37,7 @@ if(length(days_missing) > 0) {
   days_missing_dat <- map_dfr(days_missing, ~get_apod(query = list(date = .x)))
   
   hist_apod <- hist_apod |> 
-    bind_rows(x) |> 
+    bind_rows(days_missing_dat) |> 
     distinct()
 }
 
