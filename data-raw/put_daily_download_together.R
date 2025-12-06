@@ -48,5 +48,5 @@ hist_apod <- hist_apod |>
 hist_apod |>
   janitor::get_dupes(date)
 
-# Push Data to Data/Fdate# Push Data to Data/Folder
+# Push Data to Package
 usethis::use_data(hist_apod, overwrite = TRUE)

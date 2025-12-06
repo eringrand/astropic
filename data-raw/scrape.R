@@ -7,5 +7,11 @@ library(glue)
 today <- today() - 1
 today_pic <- get_apod(query = list(date = today))
 
-# Write out data
-readr::write_rds(today_pic, glue::glue("data-raw/rds/{today}.rds"))
+data("hist_apod")
+
+hist_apod <- hist_apod |> 
+  bind_rows(today_pic) |> 
+  distinct()
+
+# Push Data to Package
+usethis::use_data(hist_apod, overwrite = TRUE)
