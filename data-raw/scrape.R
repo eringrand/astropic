@@ -2,6 +2,7 @@ library(astropic)
 library(lubridate)
 library(readr)
 library(glue)
+library(dplyr)
 
 # Set up what days we want data
 today <- today() - 1
