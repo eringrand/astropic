@@ -3,6 +3,7 @@ library(lubridate)
 library(readr)
 library(glue)
 library(dplyr)
+library(usethis)
 
 # Set up what days we want data
 today <- today() - 1
