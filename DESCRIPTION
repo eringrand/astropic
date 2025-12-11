@@ -26,6 +26,7 @@ Suggests:
     here,
     magick,
     scales,
-    readr
+    readr,
+    usethis
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
