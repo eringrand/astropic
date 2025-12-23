@@ -16,15 +16,13 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![codecov](https://codecov.io/gh/eringrand/astropic/graph/badge.svg?token=5HHWM5HDHE)](https://codecov.io/gh/eringrand/astropic)
 [![R-CMD-check.yaml](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/eringrand/astropic/actions/workflows/R-CMD-check.yaml)
-
 <!-- badges: end -->
 
 # astropic
 
-The goal of `astropic` is to connect R to the [NASA APOD API](https://github.com/nasa/apod-api). The APOD API supports one image
-at a time. In order to supply more than that, this package also includes the option of pulling by date ranges (of less than 2000 days at a time) and some historical data in tibble format.
+The goal of `astropic` is to connect R to the [NASA APOD API](https://github.com/nasa/apod-api). The APOD API supports one image at a time. In order to supply more than that, this package also includes the option of pulling by date ranges (of less than 2000 days at a time) and some historical data in tibble format.
 
-Thanks to Michael W. Kearney, author of [rtweet](http://rtweet.info), for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton! 
+Thanks to Michael W. Kearney, author of {{rtweet}}, for having a robust package based on connecting to an API. I didn't know much about APIs when I started this project and looking at his source code helped a ton! 
 
 Credit to the APOD API [contributors](https://github.com/nasa/apod-api/graphs/contributors) for all of their work in making the API, and the recent(ish) re-org.
 
