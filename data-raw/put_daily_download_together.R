@@ -18,32 +18,33 @@ data_dates <- hist_apod |>
   mutate(date = ymd(date)) |>
   pull(date)
 
-apod_daily <- map_dfr(list.files("data-raw/rds", full.names = TRUE), read_rds)
+# apod_daily <- map_dfr(list.files("data-raw/rds", full.names = TRUE), read_rds)
+# 
+# dates_with_img <- apod_daily |>
+#   distinct(date) |>
+#   mutate(date = ymd(date)) |>
+#   pull(date)
 
-dates_with_img <- apod_daily |>
-  distinct(date) |>
-  mutate(date = ymd(date)) |>
-  pull(date)
+days_wanted <- seq(ymd("2025-01-01"), today(), by = 1)
 
-days_wanted <- seq(ymd("2007-01-01"), today(), by = 1)
-
-days_missing <- days_wanted |> 
-  setdiff(dates_with_img) |>
+days_missing <- days_wanted[days_wanted != "2009-04-05"] |> 
+  # setdiff(dates_with_img) |>
   setdiff(ymd(pull(error_dates, date))) |>
   setdiff(data_dates) |> 
   as.Date()
 
+X1 <- get_apod(query = list(date = days_missing[1]))
+X2 <- get_apod(query = list(date = days_missing[2]))
+X3 <- get_apod(query = list(date = days_missing[3]))
+
+
 if(length(days_missing) > 0) {
-  days_missing_dat <- map_dfr(days_missing, ~get_apod(query = list(date = .x)))
+  days_missing_dat <- map_dfr(days_missing, get_apod(query = list(date = x)))
   
   hist_apod <- hist_apod |> 
     bind_rows(days_missing_dat) |> 
     distinct()
 }
-
-hist_apod <- hist_apod |> 
-  bind_rows(apod_daily) |> 
-  distinct()
 
 hist_apod |>
   janitor::get_dupes(date)
