@@ -37,4 +37,7 @@ hist_apod |>
   janitor::get_dupes(date)
 
 # Push Data to Package
+hist_apod <- hist_apod |> 
+  arrange(date)
+
 usethis::use_data(hist_apod, overwrite = TRUE)
